@@ -953,7 +953,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 <div align="center">
 
-🌟 Crafted with ❤️ by 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧
+🌟 Crafted with ❤️ by 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 [Dev]
 
 Empowering developers with powerful WhatsApp automation tools
 
