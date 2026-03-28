@@ -1,6 +1,6 @@
 {
   "name": "toxic-baileys",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "WhatsApp API Modification By xhclinton",
   "keywords": [
     "whatsapp",
@@ -57,7 +57,8 @@
     "cache-manager": "latest",
     "protobufjs": "^7.2.4",
     "uuid": "^9.0.0",
-    "ws": "^8.13.0"
+    "ws": "^8.13.0",
+    "p-queue": "^8.0.1"
   },
   "devDependencies": {
     "@adiwajshing/eslint-config": "github:adiwajshing/eslint-config",
