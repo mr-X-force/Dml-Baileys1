@@ -48,6 +48,7 @@
         "async-mutex": "^0.5.0",
         "audio-decode": "^2.2.1",
         "axios": "^1.7.9",
+        "cache-manager": "^5.7.6",
         "chalk": "^4.1.2",
         "futoin-hkdf": "^1.5.3",
         "libphonenumber-js": "^1.11.19",
