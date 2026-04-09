@@ -1,4 +1,4 @@
-# toxic-baileys ⭐
+# toxic-baileys™ ⭐
 
 <div align="center">
 
@@ -6,182 +6,117 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 [![npm downloads](https://img.shields.io/npm/dm/toxic-baileys.svg?style=for-the-badge)](https://www.npmjs.com/package/toxic-baileys)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/xhclintohn/Baileys)
+[![Node](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen?style=for-the-badge)](https://nodejs.org)
 
 </div>
 
-A professionally enhanced, feature-rich version of the Baileys WhatsApp Web API. Built for developers requiring robust WhatsApp automation with modern tooling and comprehensive documentation.
+A professionally enhanced, feature-rich fork of the Baileys WhatsApp Web API. Built for developers who need robust, stable WhatsApp automation with extended message types, improved connection handling, and comprehensive documentation.
 
-**Maintainer:** 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 [Dev]
+**Maintainer:** 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 ✓
 
 ---
 
 ## 📋 Table of Contents
 
-- [✨ Features](#✨-features)
-
-- [📦 Installation](#📦-installation)
-
-- [🚀 Quick Start](#🚀-quick-start)
-
-- [🔌 Connection & Configuration](#🔌-connection--configuration)
-
-- [💾 Authentication State Management](#💾-authentication-state-management)
-
-- [📤 Sending Messages](#📤-sending-messages)
-
-- [📁 Chat & Message Management](#📁-chat--message-management)
-
-- [👥 Group Management](#👥-group-management)
-  - [Group Operations](#group-operations)
-  - [Group Status](#group-status-management)
-
-- [👤 User & Profile Management](#👤-user--profile-management)
-
-- [🔒 Privacy & Block Management](#🔒-privacy--block-management)
-
-- [🗄️ Data Store Implementation](#🗄️-data-store-implementation)
-
-- [🛠️ Utility Functions](#🛠️-utility-functions)
-- [💡 Best Practices & Tips](#💡-best-practices--tips)
-- 
-- [⚠️ Important Legal Notice](#⚠️-important-legal-notice)
-- 
-- [🆘 Getting Help](#🆘-getting-help)
-- 
-- [📄 License](#📄-license)
-- 
-- [🤝 Contributing](#🤝-contributing)
+- [✨ Features](#-features)
+- [📦 Installation](#-installation)
+- [🚀 Quick Start](#-quick-start)
+- [🔌 Connection & Configuration](#-connection--configuration)
+- [💾 Authentication State Management](#-authentication-state-management)
+- [📤 Sending Messages](#-sending-messages)
+  - [Basic Messages](#basic-messages)
+  - [Media Messages](#media-messages)
+  - [Interactive Messages](#interactive-messages)
+  - [Album Messages](#album-messages)
+  - [Event Messages](#event-messages)
+  - [Poll & Poll Result Messages](#poll--poll-result-messages)
+  - [Group Status Messages](#group-status-messages)
+  - [Payment Request Messages](#payment-request-messages)
+  - [Product Messages](#product-messages)
+  - [Button & Template Messages](#button--template-messages)
+- [📁 Chat & Message Management](#-chat--message-management)
+- [👥 Group Management](#-group-management)
+- [👤 User & Profile Management](#-user--profile-management)
+- [📡 Newsletter / Channel Management](#-newsletter--channel-management)
+- [🔒 Privacy & Block Management](#-privacy--block-management)
+- [🗄️ Data Store Implementation](#️-data-store-implementation)
+- [🛠️ Utility Functions](#️-utility-functions)
+- [💡 Best Practices & Tips](#-best-practices--tips)
+- [⚠️ Important Legal Notice](#️-important-legal-notice)
+- [🆘 Getting Help](#-getting-help)
+- [📄 License](#-license)
 
 ---
 
-<h2 align="center">✨ Features</h2>
+## ✨ Features
 
-- 🚀 **Modern & Fast** – Built with TypeScript and latest technologies
-- 
-- 🔧 **Enhanced Stability** – Improved connection handling and error recovery
-- 
-- 📱 **Multi-Device Support** – Full support for WhatsApp's multi-device protocol
-- 
-- 🔐 **End-to-End Encryption** – Secure communication using Signal Protocol
-- 
-- 📨 **All Message Types** – Support for text, media, documents, contacts, locations, polls, and more
-- 
-- 👥 **Advanced Group Management** – Comprehensive group controls and utilities, including group status support
-- 
-- 💾 **Flexible Authentication** – Multiple auth state storage options
-- 
-- 🛠️ **Developer Friendly** – Clean API, extensive examples, and detailed documentation
+- 🚀 **Modern & Fast** — Latest WA version `[2,3000,1035194821]`, optimised pre-key upload (812 keys)
+- 🔧 **Enhanced Stability** — Improved connection handling, rate-limit backoff, 5 s keepAlive grace
+- 📱 **Multi-Device Support** — Full WhatsApp multi-device protocol with improved `historySyncConfig`
+- 🔐 **End-to-End Encryption** — Signal Protocol, `inlineInitialPayloadInE2EeMsg: true`
+- 📨 **Extended Message Types** — Interactive, album, event, poll result, group status, payment, product
+- 👥 **Advanced Group Management** — Group controls, group status V2, communities support
+- 💾 **Flexible Auth** — Multi-file auth state with `makeCacheableSignalKeyStore`
+- 📡 **Full Newsletter/Channel API** — Follow, create, metadata, `newsletterId()` helper
+- 🛠️ **Developer Friendly** — `toxicHandler` exposed on socket, clean API
+- 🌐 **WebSocket Improvements** — `perMessageDeflate: false`, 100 MB max payload
 
 ---
 
-<h2 align="center">📦 Installation</h2>
+## 📦 Installation
 
-Choose the installation method that best fits your workflow:
-
-### **Method 1: Package Aliasing (Advanced)**
-Use npm aliasing to replace the original package with this enhanced version:
-
-#### Using Git (Recomended)
-```json
-// In your package.json
-"dependencies": {
-    "@whiskeysockets/baileys": "github:xhclintohn/Baileys.git"
-}
-```
-
-#### Using NPM
-```json
-// In your package.json
-"dependencies": {
-    "@whiskeysockets/baileys": "npm:toxic-baileys@latest"
-}
-```
-
-Then run `npm install`.
-
-**Note:** This will make your imports of `@whiskeysockets/baileys` resolve to this enhanced package.
-
-### **Method 2: Via npm (Recommended for Production)**
+### Via npm
 ```bash
 npm install toxic-baileys
 ```
 
-### **Method 3: Directly from GitHub**
-Install the latest development version directly from the source repository:
-
-```bash
-# Install main branch
-npm install https://github.com/xhclintohn/Baileys.git
-```
-
-### **Method 4: Local Development Setup**
-For contributing or local testing, install from a local directory:
-
-```bash
-# Clone the repository first
-git clone https://github.com/xhclintohn/Baileys.git
-cd your-project
-
-# Install as local dependency
-npm install /path/to/cloned/Baileys
-```
-
-### **Method 5: Using Yarn**
+### Via Yarn
 ```bash
 yarn add toxic-baileys
-# or from GitHub
-yarn add https://github.com/xhclintohn/Baileys.git
+```
+
+### From GitHub (edge)
+```bash
+npm install github:xhclintohn/Baileys
+```
+
+### Drop-in replacement for `@whiskeysockets/baileys`
+```json
+{
+  "dependencies": {
+    "@whiskeysockets/baileys": "npm:toxic-baileys@latest"
+  }
+}
 ```
 
 ---
 
-<h2 align="center">🚀 Quick Start</h2>
+## 🚀 Quick Start
 
-### Basic Connection Example
 <details>
-<summary>Click to expand code</summary>
+<summary>Basic Connection (QR Code)</summary>
 
 ```javascript
-const { makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
+const { makeWASocket, useMultiFileAuthState, DisconnectReason } = require('toxic-baileys');
 const { Boom } = require('@hapi/boom');
 
 async function connectToWhatsApp() {
     const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
-    
-    const sock = makeWASocket({
-        auth: state,
-        printQRInTerminal: true,
-        browser: ["Ubuntu", "Chrome", "125"],
-        logger: console, // Optional: Enable detailed logging
-    });
+    const sock = makeWASocket({ auth: state, printQRInTerminal: true });
 
-    sock.ev.on('connection.update', (update) => {
-        const { connection, lastDisconnect } = update;
+    sock.ev.on('connection.update', ({ connection, lastDisconnect }) => {
         if (connection === 'close') {
-            const shouldReconnect = (lastDisconnect?.error)?.output?.statusCode !== DisconnectReason.loggedOut;
-            console.log('Connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect);
-            if (shouldReconnect) {
-                connectToWhatsApp();
-            }
+            const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
+            if (shouldReconnect) connectToWhatsApp();
         } else if (connection === 'open') {
-            console.log('✅ Successfully connected to WhatsApp!');
-            // Send a welcome message to yourself
-            const selfJid = sock.user.id;
-            sock.sendMessage(selfJid, { text: 'Hello! I am online using toxic-baileys 🤖' });
+            console.log('Connected!');
         }
     });
 
     sock.ev.on('messages.upsert', async ({ messages }) => {
         for (const m of messages) {
             if (!m.message) continue;
-            console.log('📱 New message received:', JSON.stringify(m, undefined, 2));
-            
-            // Example: Auto-reply to messages
-            if (m.message.conversation) {
-                await sock.sendMessage(m.key.remoteJid, { 
-                    text: `You said: "${m.message.conversation}"` 
-                });
-            }
+            console.log('Message:', JSON.stringify(m, undefined, 2));
         }
     });
 
@@ -192,76 +127,53 @@ connectToWhatsApp().catch(console.error);
 ```
 </details>
 
-### Connect with Pairing Code (Alternative to QR)
 <details>
-<summary>Click to expand code</summary>
+<summary>Pairing Code (no QR)</summary>
 
 ```javascript
-const { makeWASocket } = require('@whiskeysockets/baileys');
+const { makeWASocket, useMultiFileAuthState } = require('toxic-baileys');
 
-const sock = makeWASocket({ printQRInTerminal: false });
+async function connectWithPairing() {
+    const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
+    const sock = makeWASocket({ auth: state, printQRInTerminal: false });
+    sock.ev.on('creds.update', saveCreds);
 
-// Request a pairing code for a phone number
-if (!sock.authState.creds.registered) {
-    const phoneNumber = '1234567890'; // Include country code, no symbols
-    const pairingCode = await sock.requestPairingCode(phoneNumber);
-    console.log('🔑 Your Pairing Code:', pairingCode);
-    
-    // For custom pairing codes (must be 8 characters):
-    // const customPairingCode = await sock.requestPairingCode(phoneNumber, 'MYCODE123');
+    if (!sock.authState.creds.registered) {
+        const phoneNumber = '254712345678'; // no + or spaces
+        const code = await sock.requestPairingCode(phoneNumber);
+        console.log('Pairing Code:', code);
+    }
 }
+
+connectWithPairing().catch(console.error);
 ```
 </details>
 
 ---
 
-<h2 align="center">🔌 Connection & Configuration</h2>
+## 🔌 Connection & Configuration
 
-### Browser Configuration Constants
 <details>
-<summary>Click to expand code</summary>
+<summary>Full Socket Configuration</summary>
 
 ```javascript
-const { makeWASocket, Browsers } = require('@whiskeysockets/baileys');
-
-// Pre-defined browser configurations
-const sock = makeWASocket({
-    browser: Browsers.ubuntu('MyApp'),   // Ubuntu/Chrome
-    // browser: Browsers.macOS('MyApp'), // macOS/Safari
-    // browser: Browsers.windows('MyApp'), // Windows/Edge
-    printQRInTerminal: true,
-    syncFullHistory: true, // Receive full chat history
-});
-```
-</details>
-
-### Important Socket Configuration Notes
-<details>
-<summary>Click to expand code</summary>
-
-```javascript
+const { makeWASocket, Browsers } = require('toxic-baileys');
 const NodeCache = require('@cacheable/node-cache');
+
 const groupCache = new NodeCache({ stdTTL: 300, useClones: false });
 
 const sock = makeWASocket({
-    // Cache group metadata for better performance
-    cachedGroupMetadata: async (jid) => groupCache.get(jid),
-    
-    // Custom message store retrieval
-    getMessage: async (key) => {
-        // Implement your own message store logic here
-        return await yourDatabase.getMessage(key);
-    },
-    
-    // Disable online presence to receive notifications in mobile app
+    browser: Browsers.macOS('Chrome'),
+    syncFullHistory: true,
     markOnlineOnConnect: false,
-    
-    // Connection timeouts (default connectTimeoutMs is 20000)
-    connectTimeoutMs: 60000,
-    defaultQueryTimeoutMs: 60000,
+    connectTimeoutMs: 60_000,
+    defaultQueryTimeoutMs: 60_000,
+    keepAliveIntervalMs: 30_000,
+    generateHighQualityLinkPreview: true,
+    cachedGroupMetadata: async (jid) => groupCache.get(jid),
+    getMessage: async (key) => await yourStore.getMessage(key),
 });
 
-// Update cache when groups change
 sock.ev.on('groups.update', async ([event]) => {
     const metadata = await sock.groupMetadata(event.id);
     groupCache.set(event.id, metadata);
@@ -271,692 +183,713 @@ sock.ev.on('groups.update', async ([event]) => {
 
 ---
 
-<h2 align="center">💾 Authentication State Management</h2>
+## 💾 Authentication State Management
 
-### Multi-File Auth State (Recommended for Development)
 <details>
-<summary>Click to expand code</summary>
+<summary>Multi-File Auth (Development)</summary>
 
 ```javascript
-const { makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { makeWASocket, useMultiFileAuthState } = require('toxic-baileys');
 
-async function connect() {
-    const { state, saveCreds } = await useMultiFileAuthState('auth_info_directory');
-    const sock = makeWASocket({ auth: state });
-    sock.ev.on('creds.update', saveCreds);
-}
+const { state, saveCreds } = await useMultiFileAuthState('./auth_info');
+const sock = makeWASocket({ auth: state });
+sock.ev.on('creds.update', saveCreds);
 ```
 </details>
 
-### Custom Database Auth State (Production)
 <details>
-<summary>Click to expand code</summary>
+<summary>Custom Database Auth (Production)</summary>
 
 ```javascript
-const { makeWASocket, makeCacheableSignalKeyStore } = require('@whiskeysockets/baileys');
+const { makeWASocket, makeCacheableSignalKeyStore } = require('toxic-baileys');
 
-// Example with custom database storage
 const myAuthState = {
-    creds: await yourDatabase.getAuthCreds(),
-    keys: makeCacheableSignalKeyStore(
-        await yourDatabase.getSignalKeys(),
-        console.log // Optional logger
-    )
+    creds: await db.getAuthCreds(),
+    keys: makeCacheableSignalKeyStore(await db.getSignalKeys(), console)
 };
-
 const sock = makeWASocket({ auth: myAuthState });
-
-// Update your database when credentials change
-sock.ev.on('creds.update', async (creds) => {
-    await yourDatabase.saveAuthCreds(creds);
-});
+sock.ev.on('creds.update', async (creds) => await db.saveAuthCreds(creds));
 ```
 </details>
 
 ---
 
-<h2 align="center">📤 Sending Messages</h2>
+## 📤 Sending Messages
 
-### Basic Message Types
+### Basic Messages
+
 <details>
-<summary>Click to expand code</summary>
+<summary>Text, Reply, Mention, Forward, Edit, Delete, React</summary>
 
 ```javascript
-// Text message
 await sock.sendMessage(jid, { text: 'Hello World!' });
+await sock.sendMessage(jid, { text: 'Reply!' }, { quoted: m });
+await sock.sendMessage(jid, { text: 'Hi @user!', mentions: ['254712345678@s.whatsapp.net'] });
+await sock.sendMessage(jid, { forward: m });
 
-// Text with mentions
-await sock.sendMessage(jid, {
-    text: 'Hello @12345678901!',
-    mentions: ['12345678901@s.whatsapp.net']
-});
+const sent = await sock.sendMessage(jid, { text: 'Original' });
+await sock.sendMessage(jid, { text: 'Edited!', edit: sent.key });
+await sock.sendMessage(jid, { delete: sent.key });
 
-// Reply to a message
-await sock.sendMessage(jid, { text: 'This is a reply!' }, { quoted: originalMessage });
-
-// Forward a message
-await sock.sendMessage(jid, { forward: messageToForward });
+await sock.sendMessage(jid, { react: { text: '🔥', key: m.key } });
+await sock.sendMessage(jid, { react: { text: '', key: m.key } }); // remove reaction
 ```
 </details>
 
 ### Media Messages
+
 <details>
-<summary>Click to expand code</summary>
+<summary>Image, Video, Audio, Document, Sticker, View Once</summary>
 
 ```javascript
-// Image with caption
-await sock.sendMessage(jid, {
-    image: { url: './path/to/image.jpg' }, // Can also use Buffer or stream
-    caption: 'Check out this image!',
-    mimetype: 'image/jpeg'
-});
-
-// Video
-await sock.sendMessage(jid, {
-    video: { url: './path/to/video.mp4' },
-    caption: 'Watch this video',
-    gifPlayback: true // For GIF-like playback
-});
-
-// Audio/voice note
-await sock.sendMessage(jid, {
-    audio: { url: './path/to/audio.ogg' },
-    mimetype: 'audio/ogg; codecs=opus',
-    ptt: true // For voice note
-});
-
-// Document
-await sock.sendMessage(jid, {
-    document: { url: './path/to/document.pdf' },
-    fileName: 'ImportantDocument.pdf',
-    mimetype: 'application/pdf'
-});
+await sock.sendMessage(jid, { image: { url: './image.jpg' }, caption: 'Caption' });
+await sock.sendMessage(jid, { image: fs.readFileSync('./img.jpg') });
+await sock.sendMessage(jid, { video: { url: './video.mp4' }, caption: 'Video' });
+await sock.sendMessage(jid, { video: { url: './animation.mp4' }, gifPlayback: true });
+await sock.sendMessage(jid, { audio: { url: './voice.ogg' }, mimetype: 'audio/ogg; codecs=opus', ptt: true });
+await sock.sendMessage(jid, { audio: { url: './song.mp3' }, mimetype: 'audio/mp4' });
+await sock.sendMessage(jid, { document: { url: './file.pdf' }, fileName: 'MyDoc.pdf', mimetype: 'application/pdf' });
+await sock.sendMessage(jid, { sticker: { url: './sticker.webp' } });
+await sock.sendMessage(jid, { image: fs.readFileSync('./img.jpg'), viewOnce: true });
 ```
 </details>
 
 ### Interactive Messages
+
 <details>
-<summary>Click to expand code</summary>
+<summary>Interactive Message with Native Flow Buttons</summary>
 
 ```javascript
-// Location
+// Copy button
 await sock.sendMessage(jid, {
-    location: {
-        degreesLatitude: 40.7128,
-        degreesLongitude: -74.0060,
-        name: 'New York City'
+    interactiveMessage: {
+        header: 'toxic-baileys™',
+        title: 'Hello World',
+        footer: 'By 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 ✓',
+        buttons: [
+            {
+                name: 'cta_copy',
+                buttonParamsJson: JSON.stringify({ display_text: 'Copy Code', id: '1', copy_code: 'TOXIC123' })
+            }
+        ]
     }
-});
+}, { quoted: m });
 
-// Contact card
-const vcard = `BEGIN:VCARD
-VERSION:3.0
-FN:John Doe
-ORG:Example Corp;
-TEL;type=CELL;type=VOICE;waid=1234567890:+1 234 567 890
-EMAIL:john@example.com
-END:VCARD`;
-
+// URL button
 await sock.sendMessage(jid, {
-    contacts: {
-        displayName: 'John Doe',
-        contacts: [{ vcard }]
+    interactiveMessage: {
+        header: 'Visit Us',
+        title: 'toxic-baileys',
+        footer: 'GitHub',
+        buttons: [
+            {
+                name: 'cta_url',
+                buttonParamsJson: JSON.stringify({ display_text: 'Open GitHub', url: 'https://github.com/xhclintohn/Baileys' })
+            }
+        ]
     }
-});
+}, { quoted: m });
 
-// Poll
+// With image thumbnail
+await sock.sendMessage(jid, {
+    interactiveMessage: {
+        header: 'With Image',
+        title: 'toxic-baileys™',
+        footer: 'Best Baileys Fork',
+        image: { url: 'https://example.com/image.jpg' },
+        buttons: [
+            { name: 'cta_copy', buttonParamsJson: JSON.stringify({ display_text: 'Copy', id: '1', copy_code: 'HELLO' }) }
+        ]
+    }
+}, { quoted: m });
+
+// Single select list
+await sock.sendMessage(jid, {
+    interactiveMessage: {
+        header: 'Choose',
+        title: 'Menu',
+        footer: 'Select below',
+        nativeFlowMessage: {
+            buttons: [
+                {
+                    name: 'single_select',
+                    buttonParamsJson: JSON.stringify({
+                        title: 'Options',
+                        sections: [
+                            {
+                                title: 'Commands',
+                                rows: [
+                                    { title: 'Option 1', description: 'First', id: 'opt_1' },
+                                    { title: 'Option 2', description: 'Second', id: 'opt_2' }
+                                ]
+                            }
+                        ]
+                    })
+                }
+            ]
+        }
+    }
+}, { quoted: m });
+
+// With externalAdReply
+await sock.sendMessage(jid, {
+    interactiveMessage: {
+        header: 'Premium',
+        title: 'toxic-baileys™',
+        footer: 'By 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧',
+        externalAdReply: {
+            title: 'toxic-baileys',
+            body: 'Best WhatsApp Library',
+            mediaType: 1,
+            thumbnailUrl: 'https://example.com/thumb.jpg',
+            sourceUrl: 'https://github.com/xhclintohn/Baileys',
+            showAdAttribution: true,
+            renderLargerThumbnail: true
+        },
+        buttons: [
+            { name: 'cta_url', buttonParamsJson: JSON.stringify({ display_text: 'Visit', url: 'https://github.com/xhclintohn/Baileys' }) }
+        ]
+    }
+}, { quoted: m });
+
+// Interactive with document
+await sock.sendMessage(jid, {
+    interactiveMessage: {
+        header: 'Document',
+        title: 'File',
+        footer: 'toxic-baileys™',
+        document: fs.readFileSync('./file.pdf'),
+        mimetype: 'application/pdf',
+        fileName: 'document.pdf',
+        buttons: [
+            { name: 'cta_url', buttonParamsJson: JSON.stringify({ display_text: 'GitHub', url: 'https://github.com/xhclintohn/Baileys' }) }
+        ]
+    }
+}, { quoted: m });
+```
+</details>
+
+### Album Messages
+
+<details>
+<summary>Send multiple images/videos in a single album</summary>
+
+```javascript
+await sock.sendMessage(jid, {
+    albumMessage: [
+        { image: fs.readFileSync('./photo1.jpg'), caption: 'First photo' },
+        { image: { url: 'https://example.com/photo2.jpg' }, caption: 'Second photo' },
+        { video: fs.readFileSync('./clip.mp4'), caption: 'A video clip' }
+    ]
+}, { quoted: m });
+```
+</details>
+
+### Event Messages
+
+<details>
+<summary>Send WhatsApp event invitations</summary>
+
+```javascript
+await sock.sendMessage(jid, {
+    eventMessage: {
+        isCanceled: false,
+        name: 'toxic-baileys Launch',
+        description: 'Join us for the launch!',
+        location: { degreesLatitude: -1.2921, degreesLongitude: 36.8219, name: 'Nairobi, Kenya' },
+        joinLink: 'https://call.whatsapp.com/video/your-link',
+        startTime: String(Math.floor(Date.now() / 1000) + 3600),
+        endTime: String(Math.floor(Date.now() / 1000) + 7200),
+        extraGuestsAllowed: true
+    }
+}, { quoted: m });
+```
+</details>
+
+### Poll & Poll Result Messages
+
+<details>
+<summary>Polls and displaying poll results</summary>
+
+```javascript
+// Create poll
 await sock.sendMessage(jid, {
     poll: {
-        name: 'Favorite Programming Language?',
-        values: ['JavaScript', 'Python', 'TypeScript', 'Go', 'Rust'],
+        name: 'Best WhatsApp library?',
+        values: ['toxic-baileys', 'Baileys', 'Other'],
         selectableCount: 1
     }
 });
 
-// Reaction
+// Display poll results
 await sock.sendMessage(jid, {
-    react: {
-        text: '👍', // Empty string to remove reaction
-        key: targetMessage.key
+    pollResultMessage: {
+        name: 'Best Library Results',
+        pollVotes: [
+            { optionName: 'toxic-baileys', optionVoteCount: '42' },
+            { optionName: 'Baileys', optionVoteCount: '10' },
+            { optionName: 'Other', optionVoteCount: '2' }
+        ]
     }
+}, { quoted: m });
+```
+</details>
+
+### Group Status Messages
+
+<details>
+<summary>Post status to a group</summary>
+
+```javascript
+await sock.sendMessage(groupJid, { groupStatusMessage: { text: 'Hello group! 👋' } });
+await sock.sendMessage(groupJid, { groupStatusMessage: { image: fs.readFileSync('./banner.jpg'), caption: 'Update!' } });
+await sock.sendMessage(groupJid, { groupStatusMessage: { video: fs.readFileSync('./promo.mp4'), caption: 'Promo' } });
+await sock.sendMessage(groupJid, { groupStatusMessage: { audio: fs.readFileSync('./audio.mp4'), mimetype: 'audio/mp4' } });
+```
+</details>
+
+### Payment Request Messages
+
+<details>
+<summary>Send payment requests</summary>
+
+```javascript
+await sock.sendMessage(jid, {
+    requestPaymentMessage: {
+        currency: 'KES',
+        amount: 500000,
+        from: m.sender,
+        background: { id: 'DEFAULT', placeholderArgb: 0xFFF0F0F0 }
+    }
+}, { quoted: m });
+```
+</details>
+
+### Product Messages
+
+<details>
+<summary>Send product catalog messages</summary>
+
+```javascript
+await sock.sendMessage(jid, {
+    productMessage: {
+        title: 'Premium Script',
+        description: 'Best bot script available',
+        thumbnail: { url: 'https://example.com/product.jpg' },
+        productId: 'PROD001',
+        retailerId: 'xhclinton',
+        url: 'https://github.com/xhclintohn/Baileys',
+        body: 'Full featured automation',
+        footer: 'Special price',
+        priceAmount1000: 10000,
+        currencyCode: 'USD',
+        buttons: [{ name: 'cta_url', buttonParamsJson: JSON.stringify({ display_text: 'Buy Now', url: 'https://github.com/xhclintohn/Baileys' }) }]
+    }
+}, { quoted: m });
+```
+</details>
+
+### Button & Template Messages
+
+<details>
+<summary>Classic buttons, list messages, template buttons</summary>
+
+```javascript
+// Classic buttons
+await sock.sendMessage(jid, {
+    text: 'Choose:',
+    footer: 'toxic-baileys™',
+    buttons: [
+        { buttonId: 'btn_1', buttonText: { displayText: 'Option 1' }, type: 1 },
+        { buttonId: 'btn_2', buttonText: { displayText: 'Option 2' }, type: 1 }
+    ],
+    headerType: 1
 });
+
+// List message
+await sock.sendMessage(jid, {
+    text: 'Select an item:',
+    footer: 'toxic-baileys™',
+    title: 'Main Menu',
+    buttonText: 'Open Menu',
+    sections: [
+        {
+            title: 'Commands',
+            rows: [
+                { title: '!help', rowId: 'help', description: 'Show help' },
+                { title: '!ping', rowId: 'ping', description: 'Check bot' }
+            ]
+        }
+    ]
+});
+
+// Template buttons
+await sock.sendMessage(jid, {
+    text: 'Quick actions:',
+    footer: 'toxic-baileys™',
+    templateButtons: [
+        { index: 1, urlButton: { displayText: '🌐 GitHub', url: 'https://github.com/xhclintohn/Baileys' } },
+        { index: 2, callButton: { displayText: '📞 Call', phoneNumber: '+254712345678' } },
+        { index: 3, quickReplyButton: { displayText: '✅ OK', id: 'ok_reply' } }
+    ]
+});
+```
+</details>
+
+### Status Mention
+
+<details>
+<summary>Send status with mentions</summary>
+
+```javascript
+// Send status and mention specific contacts/groups
+await sock.sendStatusMention(
+    { text: 'Hello everyone! 👋', backgroundColor: '#FF5733' },
+    ['254712345678@s.whatsapp.net', groupJid]
+);
+
+// Media status with mention
+await sock.sendStatusMention(
+    { image: fs.readFileSync('./banner.jpg'), caption: 'New update!' },
+    ['254712345678@s.whatsapp.net']
+);
 ```
 </details>
 
 ---
 
-<h2 align="center">📁 Chat & Message Management</h2>
+## 📁 Chat & Message Management
 
-### Chat Operations
 <details>
-<summary>Click to expand code</summary>
+<summary>Chat Operations</summary>
 
 ```javascript
-// Archive/unarchive chat
 await sock.chatModify({ archive: true }, jid);
 await sock.chatModify({ archive: false }, jid);
-
-// Mute/unmute chat (8 hours example)
 await sock.chatModify({ mute: 8 * 60 * 60 * 1000 }, jid);
 await sock.chatModify({ mute: null }, jid);
-
-// Pin/unpin chat
 await sock.chatModify({ pin: true }, jid);
 await sock.chatModify({ pin: false }, jid);
-
-// Mark as read/unread
 await sock.chatModify({ markRead: true }, jid);
 await sock.chatModify({ markRead: false }, jid);
+await sock.readMessages([m.key]);
 
-// Delete chat
-await sock.chatModify({ delete: true }, jid);
-```
-</details>
-
-### Message Operations
-<details>
-<summary>Click to expand code</summary>
-
-```javascript
-// Delete message for everyone
-const sentMsg = await sock.sendMessage(jid, { text: 'This will be deleted' });
-await sock.sendMessage(jid, { delete: sentMsg.key });
-
-// Edit message
-const response = await sock.sendMessage(jid, { text: 'Original text' });
-await sock.sendMessage(jid, { 
-    text: 'Updated text!',
-    edit: response.key
-});
-
-// Read messages
-await sock.readMessages([messageKey1, messageKey2]);
-
-// Download media from message
-const { downloadMediaMessage } = require('@whiskeysockets/baileys');
-const fs = require('fs');
-
-sock.ev.on('messages.upsert', async ({ messages }) => {
-    const m = messages[0];
-    if (m.message?.imageMessage) {
-        const stream = await downloadMediaMessage(
-            m, 'stream', {}, { logger: console }
-        );
-        const file = fs.createWriteStream('./download.jpg');
-        stream.pipe(file);
-    }
-});
+const { downloadMediaMessage } = require('toxic-baileys');
+const buffer = await downloadMediaMessage(m, 'buffer', {}, { logger: console });
+fs.writeFileSync('./download.jpg', buffer);
 ```
 </details>
 
 ---
 
-<h2 align="center">👥 Group Management</h2>
+## 👥 Group Management
 
-### Group Operations
 <details>
-<summary>Click to expand code</summary>
+<summary>Group Operations</summary>
 
 ```javascript
-// Create group
-const group = await sock.groupCreate('My New Group', [
-    '12345678901@s.whatsapp.net',
-    '09876543210@s.whatsapp.net'
-]);
-
-// Add/remove participants
-await sock.groupParticipantsUpdate(
-    groupJid,
-    ['12345678901@s.whatsapp.net'],
-    'add' // 'remove', 'promote', or 'demote'
-);
-
-// Update group info
+const group = await sock.groupCreate('My Group', ['254712345678@s.whatsapp.net']);
+await sock.groupParticipantsUpdate(groupJid, ['254712345678@s.whatsapp.net'], 'add');
+await sock.groupParticipantsUpdate(groupJid, ['254712345678@s.whatsapp.net'], 'remove');
+await sock.groupParticipantsUpdate(groupJid, ['254712345678@s.whatsapp.net'], 'promote');
+await sock.groupParticipantsUpdate(groupJid, ['254712345678@s.whatsapp.net'], 'demote');
 await sock.groupUpdateSubject(groupJid, 'New Group Name');
-await sock.groupUpdateDescription(groupJid, 'New group description');
+await sock.groupUpdateDescription(groupJid, 'New description');
+await sock.groupSettingUpdate(groupJid, 'announcement');
+await sock.groupSettingUpdate(groupJid, 'not_announcement');
+await sock.groupSettingUpdate(groupJid, 'locked');
+await sock.groupSettingUpdate(groupJid, 'unlocked');
 
-// Group settings
-await sock.groupSettingUpdate(groupJid, 'announcement'); // Only admins can send
-await sock.groupSettingUpdate(groupJid, 'not_announcement'); // Everyone can send
-await sock.groupSettingUpdate(groupJid, 'locked'); // Only admins can change settings
-await sock.groupSettingUpdate(groupJid, 'unlocked'); // Everyone can change settings
-
-// Invite links
-const inviteCode = await sock.groupInviteCode(groupJid);
-const inviteLink = `https://chat.whatsapp.com/${inviteCode}`;
-
-// Join group via invite
-const groupJid = await sock.groupAcceptInvite('INVITECODEHERE');
-
-// Get group metadata
-const metadata = await sock.groupMetadata(groupJid);
-console.log(`Group: ${metadata.subject}, Participants: ${metadata.participants.length}`);
-
-// Leave group
+const code = await sock.groupInviteCode(groupJid);
+await sock.groupAcceptInvite('INVITE_CODE');
+const meta = await sock.groupMetadata(groupJid);
 await sock.groupLeave(groupJid);
-```
-</details>
-
-### Group Status Management
-<details>
-<summary>Click to expand code</summary>
-
-```javascript
-module.exports = {
-  name: 'gstatus',
-  aliases: ['groupstatus', 'gs'],
-  description: 'Posts a group status with text, image, video, or audio.',
-  run: async (context) => {
-    const { client, m, prefix, isBotAdmin, IsGroup, botname } = context;
-
-    const formatMsg = (text) => `◈━━━━━━━━━━━━━━━◈\n${text}\n◈━━━━━━━━━━━━━━━◈`;
-
-    try {
-      if (!botname) {
-        return client.sendText(m.chat, formatMsg(`Bot name is not set. Please configure it before using this command.`), m);
-      }
-
-      if (!m.sender || typeof m.sender !== 'string' || !m.sender.includes('@s.whatsapp.net')) {
-        return client.sendText(m.chat, formatMsg(`Could not identify your WhatsApp ID. Please try again.`), m);
-      }
-
-      if (!IsGroup) {
-        return client.sendText(m.chat, formatMsg(`This command can only be used in group chats.`), m);
-      }
-
-      if (!isBotAdmin) {
-        return client.sendText(m.chat, formatMsg(`I need to be *admin* to post a group status. Please make me admin first.`), m);
-      }
-
-      const settings = await getSettings();
-      if (!settings) {
-        return client.sendText(m.chat, formatMsg(`Failed to load settings. Please try again later.`), m);
-      }
-
-      const quoted = m.quoted ? m.quoted : m;
-      const mime = (quoted.msg || quoted).mimetype || '';
-      const caption = m.body
-        .replace(new RegExp(`^${prefix}(gstatus|groupstatus|gs)\\s*`, 'i'), '')
-        .trim();
-
-      if (!/image|video|audio/.test(mime) && !caption) {
-        return client.sendText(
-          m.chat,
-          formatMsg(`Please reply to an image, video, audio, or include text with the command.\nExample: ${prefix}gstatus Check out this update!`),
-          m
-        );
-      }
-
-      const defaultCaption = `Group status Posted By Toxic-MD✅\n\nJOIN\nhttps://chat.whatsapp.com/GoXKLVJgTAAC3556FXkfFI?mode=wwt`;
-
-      if (/image/.test(mime)) {
-        const buffer = await client.downloadMediaMessage(quoted);
-        await client.sendMessage(m.chat, {
-          groupStatusMessage: {
-            image: buffer,
-            caption: caption || defaultCaption
-          }
-        });
-        await client.sendText(m.chat, formatMsg(`Image status has been posted successfully ✅`), m);
-      } else if (/video/.test(mime)) {
-        const buffer = await client.downloadMediaMessage(quoted);
-        await client.sendMessage(m.chat, {
-          groupStatusMessage: {
-            video: buffer,
-            caption: caption || defaultCaption
-          }
-        });
-        await client.sendText(m.chat, formatMsg(`Video status has been posted successfully ✅`), m);
-      } else if (/audio/.test(mime)) {
-        const buffer = await client.downloadMediaMessage(quoted);
-        await client.sendMessage(m.chat, {
-          groupStatusMessage: {
-            audio: buffer,
-            mimetype: 'audio/mp4'
-          }
-        });
-        await client.sendText(m.chat, formatMsg(`Audio status has been posted successfully ✅`), m);
-      } else if (caption) {
-        await client.sendMessage(m.chat, {
-          groupStatusMessage: { text: caption }
-        });
-        await client.sendText(m.chat, formatMsg(`Text status has been posted successfully ✅`), m);
-      }
-
-    } catch (error) {
-      await client.sendText(
-        m.chat,
-        formatMsg(`An error occurred while posting status:\n${error.message}`),
-        m
-      );
-    }
-  }
-};
+await sock.setLabelGroup(groupJid, 'VIP');
 ```
 </details>
 
 ---
 
-<h2 align="center">👤 User & Profile Management</h2>
+## 👤 User & Profile Management
 
-### User Operations
 <details>
-<summary>Click to expand code</summary>
+<summary>Profile & Presence Operations</summary>
 
 ```javascript
-// Check if user exists on WhatsApp
-const [result] = await sock.onWhatsApp('12345678901@s.whatsapp.net');
-if (result.exists) {
-    console.log(`User exists with JID: ${result.jid}`);
-}
+const [result] = await sock.onWhatsApp('254712345678');
+console.log(result.exists, result.jid);
 
-// Get profile picture
-const ppUrl = await sock.profilePictureUrl('12345678901@s.whatsapp.net');
-const ppUrlHighRes = await sock.profilePictureUrl('12345678901@s.whatsapp.net', 'image');
+const status = await sock.checkWhatsApp('254712345678@s.whatsapp.net');
+console.log(status.isBanned, status.isNeedOfficialWa);
 
-// Get user status
-const status = await sock.fetchStatus('12345678901@s.whatsapp.net');
+const ppUrl = await sock.profilePictureUrl(jid, 'image');
+await sock.updateProfileName('My New Name');
+await sock.updateProfileStatus('Powered by toxic-baileys™ 🚀');
+await sock.updateProfilePicture(sock.user.id, fs.readFileSync('./avatar.jpg'));
 
-// Subscribe to presence updates
-sock.ev.on('presence.update', ({ id, presences }) => {
-    console.log(`${id} presence:`, presences);
-});
-await sock.presenceSubscribe('12345678901@s.whatsapp.net');
-
-// Business profile
-const businessProfile = await sock.getBusinessProfile('12345678901@s.whatsapp.net');
-```
-</details>
-
-### Profile Operations
-<details>
-<summary>Click to expand code</summary>
-
-```javascript
-// Update your own profile
-await sock.updateProfileName('Your New Name');
-await sock.updateProfileStatus('Online and coding! 🚀');
-
-// Update profile picture
-await sock.updateProfilePicture(
-    '12345678901@s.whatsapp.net', 
-    fs.readFileSync('./new-avatar.jpg')
-);
-
-// Remove profile picture
-await sock.removeProfilePicture('12345678901@s.whatsapp.net');
+sock.ev.on('presence.update', ({ id, presences }) => console.log(id, presences));
+await sock.presenceSubscribe(jid);
+const biz = await sock.getBusinessProfile(jid);
 ```
 </details>
 
 ---
 
-<h2 align="center">🔒 Privacy & Block Management</h2>
+## 📡 Newsletter / Channel Management
 
-### Privacy Settings
 <details>
-<summary>Click to expand code</summary>
+<summary>Full Newsletter / Channel API</summary>
 
 ```javascript
-// Update various privacy settings
-await sock.updateLastSeenPrivacy('contacts'); // 'all', 'contacts', 'contact_blacklist', 'none'
-await sock.updateOnlinePrivacy('match_last_seen'); // 'all', 'match_last_seen'
+// Get ID from URL (unique to toxic-baileys)
+const info = await sock.newsletterId('https://whatsapp.com/channel/YOUR_CODE');
+console.log(JSON.parse(info)); // { name, id }
+
+// Get full metadata from URL
+const meta = await sock.newsletterFromUrl('https://whatsapp.com/channel/YOUR_CODE');
+
+// Full metadata by JID
+const fullMeta = await sock.newsletterMetadata('jid', '120363427340708111@newsletter');
+
+// Follow / unfollow / mute / unmute
+await sock.newsletterFollow('120363427340708111@newsletter');
+await sock.newsletterUnfollow('120363427340708111@newsletter');
+await sock.newsletterMute('120363427340708111@newsletter');
+await sock.newsletterUnmute('120363427340708111@newsletter');
+
+// Create a newsletter
+const channel = await sock.newsletterCreate('My Channel', 'Description', 'ALL');
+
+// Update
+await sock.newsletterUpdateName('120363427340708111@newsletter', 'New Name');
+await sock.newsletterUpdateDescription('120363427340708111@newsletter', 'New description');
+await sock.newsletterUpdatePicture('120363427340708111@newsletter', fs.readFileSync('./pic.jpg'));
+await sock.newsletterRemovePicture('120363427340708111@newsletter');
+
+// React to a newsletter message
+await sock.newsletterReactMessage('120363427340708111@newsletter', serverMessageId, '🔥');
+
+// Fetch messages
+const msgs = await sock.newsletterFetchMessages('jid', '120363427340708111@newsletter', 10);
+
+// Get all subscribed newsletters
+const subscribed = await sock.newsletterFetchAllSubscribe();
+
+// Subscribe to live updates
+await sock.subscribeNewsletterUpdates('120363427340708111@newsletter');
+
+// Delete newsletter
+await sock.newsletterDelete('120363427340708111@newsletter');
+```
+</details>
+
+---
+
+## 🔒 Privacy & Block Management
+
+<details>
+<summary>Privacy Settings & Block List</summary>
+
+```javascript
+await sock.updateLastSeenPrivacy('contacts');       // 'all' | 'contacts' | 'contact_blacklist' | 'none'
+await sock.updateOnlinePrivacy('match_last_seen');
 await sock.updateProfilePicturePrivacy('contacts');
 await sock.updateStatusPrivacy('contacts');
-await sock.updateReadReceiptsPrivacy('all'); // 'all', 'none'
+await sock.updateReadReceiptsPrivacy('all');        // 'all' | 'none'
 await sock.updateGroupsAddPrivacy('contacts');
 
-// Get current privacy settings
-const privacySettings = await sock.fetchPrivacySettings(true);
-```
-</details>
-
-### Block Management
-<details>
-<summary>Click to expand code</summary>
-
-```javascript
-// Block/unblock user
+const privacy = await sock.fetchPrivacySettings(true);
 await sock.updateBlockStatus(jid, 'block');
 await sock.updateBlockStatus(jid, 'unblock');
-
-// Get blocklist
-const blocklist = await sock.fetchBlocklist();
+const blocked = await sock.fetchBlocklist();
 ```
 </details>
 
 ---
 
-<h2 align="center">🗄️ Data Store Implementation</h2>
+## 🗄️ Data Store Implementation
 
-### In-Memory Store (Development)
 <details>
-<summary>Click to expand code</summary>
+<summary>In-Memory Store (Development)</summary>
 
 ```javascript
-const { makeInMemoryStore } = require('@whiskeysockets/baileys');
+const { makeInMemoryStore } = require('toxic-baileys');
+
 const store = makeInMemoryStore({ logger: console });
-
-// Read from/write to file
 store.readFromFile('./baileys_store.json');
-setInterval(() => {
-    store.writeToFile('./baileys_store.json');
-}, 10_000);
+setInterval(() => store.writeToFile('./baileys_store.json'), 10_000);
 
-const sock = makeWASocket({ });
+const sock = makeWASocket({});
 store.bind(sock.ev);
-
-// Use store data
-sock.ev.on('chats.upsert', () => {
-    console.log('Chats in store:', store.chats.all());
-});
 ```
 </details>
 
-### Custom Store (Production)
 <details>
-<summary>Click to expand code</summary>
+<summary>Using toxicHandler Directly</summary>
 
 ```javascript
-// Implement your own store using databases like MongoDB, PostgreSQL, etc.
-class MyCustomStore {
-    async saveMessage(key, message) {
-        await yourDatabase.messages.insertOne({ key, message });
-    }
-    
-    async loadMessage(key) {
-        return await yourDatabase.messages.findOne({ key });
-    }
-    
-    // Implement other store methods...
-}
+// toxicHandler is exposed on the socket for advanced usage
+const { toxicHandler } = sock;
 
-const myStore = new MyCustomStore();
+const paymentContent = await toxicHandler.handlePayment(content, quoted);
+const interactiveContent = await toxicHandler.handleInteractive(content, jid, quoted);
+const albumResult = await toxicHandler.handleAlbum(content, jid, quoted);
+const eventResult = await toxicHandler.handleEvent(content, jid, quoted);
+const pollResult = await toxicHandler.handlePollResult(content, jid, quoted);
+const storyResult = await toxicHandler.handleGroupStory(content, jid, quoted);
 ```
 </details>
 
 ---
 
-<h2 align="center">🛠️ Utility Functions</h2>
+## 🛠️ Utility Functions
 
-### Core Utilities
 <details>
-<summary>Click to expand code</summary>
+<summary>Core Utilities</summary>
 
 ```javascript
 const {
-    getContentType,
-    areJidsSameUser,
-    isJidGroup,
-    isJidBroadcast,
-    isJidStatusBroadcast,
-    jidNormalizedUser,
-    generateMessageID,
-    generateWAMessageContent,
-    downloadContentFromMessage,
-    getAggregateVotesInPollMessage,
-    proto
-} = require('@whiskeysockets/baileys');
+    getContentType, areJidsSameUser, isJidGroup, isJidBroadcast,
+    isJidStatusBroadcast, isJidNewsLetter, jidNormalizedUser,
+    generateMessageID, generateMessageIDV2, generateWAMessage,
+    generateWAMessageContent, generateWAMessageFromContent,
+    downloadContentFromMessage, getAggregateVotesInPollMessage,
+    extractMessageContent, normalizeMessageContent, proto
+} = require('toxic-baileys');
 
-// Message type detection
-const messageType = getContentType(message);
+const type = getContentType(m.message);
+console.log(isJidGroup('123@g.us'));        // true
+console.log(isJidNewsLetter('123@newsletter')); // true
 
-// JID validation
-if (isJidGroup(jid)) {
-    console.log('This is a group JID');
-}
+const votes = getAggregateVotesInPollMessage(
+    { message: pollMsg.message, pollUpdates },
+    sock.user.id
+);
 
-// Download content
-const stream = await downloadContentFromMessage(message.imageMessage, 'image');
-```
-</details>
-
-### Event Debugging
-<details>
-<summary>Click to expand code</summary>
-
-```javascript
-// Enable debug logging
-const sock = makeWASocket({
-    logger: console, // Simple logging
-    // logger: P({ level: 'debug' }), // Detailed logging with pino
-});
-
-// Custom WebSocket event handling
-sock.ws.on('CB:edge_routing', (node) => {
-    console.log('Edge routing event:', node);
-});
+const stream = await downloadContentFromMessage(m.message.imageMessage, 'image');
+const chunks = [];
+for await (const chunk of stream) chunks.push(chunk);
+const buffer = Buffer.concat(chunks);
 ```
 </details>
 
 ---
 
-<h2 align="center">💡 Best Practices & Tips</h2>
+## 💡 Best Practices & Tips
 
-### Performance Optimization
-1. Cache Group Metadata: Always cache group metadata to reduce API calls
-2. Implement Proper Store: Use databases instead of in-memory stores for production
-3. Handle Reconnections: Implement robust reconnection logic
-4. Rate Limiting: Respect WhatsApp's rate limits to avoid bans
-5. Error Handling: Wrap socket calls in try-catch blocks
+### Connection Stability
+1. Always implement reconnect logic on `connection === 'close'`
+2. Cache group metadata using `cachedGroupMetadata`
+3. Use `markOnlineOnConnect: false` to still receive phone notifications
+4. Set `syncFullHistory: true` for complete history
 
-### Security Considerations
-1. Never Hardcode Credentials: Use environment variables
-2. Secure Auth Storage: Encrypt authentication data in databases
-3. Input Validation: Validate all inputs before processing
-4. Regular Updates: Keep the package updated for security fixes
+### Performance
+1. Use `@cacheable/node-cache` for group metadata caching
+2. Implement a message queue with rate limiting for bulk sends
+3. Use databases instead of in-memory store for production
 
-### Common Patterns
 <details>
-<summary>Click to expand code</summary>
+<summary>Auto-reconnect pattern</summary>
 
 ```javascript
-// Auto-reconnect pattern
-async function connectWithRetry(maxRetries = 5) {
-    for (let i = 0; i < maxRetries; i++) {
+async function connectWithRetry(maxRetries = 10) {
+    let attempt = 0;
+    const connect = async () => {
+        attempt++;
         try {
-            await connectToWhatsApp();
-            break;
-        } catch (error) {
-            console.log(`Connection attempt ${i + 1} failed:`, error.message);
-            if (i === maxRetries - 1) throw error;
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            const { state, saveCreds } = await useMultiFileAuthState('./auth');
+            const sock = makeWASocket({ auth: state });
+            sock.ev.on('creds.update', saveCreds);
+            sock.ev.on('connection.update', async ({ connection, lastDisconnect }) => {
+                if (connection === 'close') {
+                    const code = lastDisconnect?.error?.output?.statusCode;
+                    if (code === DisconnectReason.loggedOut) return;
+                    const delay = Math.min(5000 * attempt, 60000);
+                    if (attempt < maxRetries) setTimeout(connect, delay);
+                } else if (connection === 'open') {
+                    attempt = 0;
+                }
+            });
+        } catch (err) {
+            if (attempt < maxRetries) setTimeout(connect, 5000 * attempt);
         }
-    }
+    };
+    await connect();
 }
+```
+</details>
 
-// Message processing queue
+<details>
+<summary>Message queue with rate limiting</summary>
+
+```javascript
 class MessageQueue {
-    constructor(sock) {
+    constructor(sock, delayMs = 1000) {
         this.sock = sock;
         this.queue = [];
         this.processing = false;
+        this.delayMs = delayMs;
     }
-    
-    async add(message) {
-        this.queue.push(message);
-        if (!this.processing) this.process();
+    async add(jid, content, options = {}) {
+        this.queue.push({ jid, content, options });
+        if (!this.processing) this._process();
     }
-    
-    async process() {
+    async _process() {
         this.processing = true;
         while (this.queue.length > 0) {
-            const message = this.queue.shift();
+            const { jid, content, options } = this.queue.shift();
             try {
-                await this.sock.sendMessage(message.jid, message.content);
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Rate limiting
-            } catch (error) {
-                console.error('Failed to send message:', error);
+                await this.sock.sendMessage(jid, content, options);
+                await new Promise(r => setTimeout(r, this.delayMs));
+            } catch (err) {
+                console.error('Send failed:', err.message);
             }
         }
         this.processing = false;
     }
 }
+
+const queue = new MessageQueue(sock, 1500);
+await queue.add(jid, { text: 'Message 1' });
+await queue.add(jid, { text: 'Message 2' });
 ```
 </details>
 
 ---
 
-<h2 align="center">⚠️ Important Legal Notice</h2>
+## ⚠️ Important Legal Notice
 
-**Disclaimer:** This project is NOT affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp LLC or any of its affiliates or subsidiaries.
+This project is **NOT** affiliated with, authorized, maintained, sponsored, or endorsed by WhatsApp LLC or any of its affiliates.
 
-The official WhatsApp website can be found at https://whatsapp.com. "WhatsApp" as well as related names, marks, emblems, and images are registered trademarks of their respective owners.
-
-### Terms of Service Compliance
-- This library is meant for legitimate automation purposes only
-- Do NOT use for spamming, bulk messaging, or harassment
-- Respect WhatsApp's rate limits and terms of service
-- Users are solely responsible for how they use this tool
+- Only message users who have explicitly consented
+- Do NOT use for spamming, bulk unsolicited messaging, or harassment
+- Respect WhatsApp's Terms of Service and rate limits
 - The maintainer assumes NO liability for misuse or damages
 
-### Responsible Use Guidelines
-1. Obtain Consent: Only message users who have explicitly consented
-2. Respect Privacy: Do not collect or misuse personal data
-3. Limit Frequency: Avoid excessive messaging that could be considered spam
-4. Provide Value: Ensure your automation provides genuine utility
-5. Monitor Usage: Regularly audit your usage patterns
+---
+
+## 🆘 Getting Help
+
+1. **GitHub Issues** — [github.com/xhclintohn/Baileys/issues](https://github.com/xhclintohn/Baileys/issues)
+2. **WhatsApp** — +254735342808
+3. **Response Time** — Typically within 24–48 hours
 
 ---
 
-<h2 align="center">🆘 Getting Help</h2>
+## 📄 License
 
-1. **Documentation:** First, check this README and the official Baileys documentation
-2. **GitHub Issues:** For bug reports and feature requests, please use the GitHub Issues page
-3. **Contact Directly:** For urgent matters or specific questions, reach out via WhatsApp: +254735342808
-4. **Community:** Consider joining relevant developer communities for broader support
+MIT License. See [LICENSE](LICENSE) for details.
 
-**Response Time:** The developer typically responds within 24-48 hours on business days.
+**Credits:** Original Baileys by [WhiskeySockets](https://github.com/WhiskeySockets/Baileys) · toxic-baileys enhancements by **𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 ✓**
 
 ---
-
-<h2 align="center">📄 License</h2>
-
-Distributed under the MIT License. See the LICENSE file in the repository for more information.
-
-### Third-Party Credits
-This project is based on the excellent work of:
-- Baileys by WhiskeySockets
-- Signal Protocol implementations
-- Various open-source contributors
-
----
-
-<h2 align="center">🤝 Contributing</h2>
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (git checkout -b feature/AmazingFeature)
-3. Commit your changes (git commit -m 'Add some AmazingFeature')
-4. Push to the branch (git push origin feature/AmazingFeature)
-5. Open a Pull Request
 
 <div align="center">
 
-🌟 Crafted with ❤️ by 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 [Dev]
+🌟 **toxic-baileys™** — Crafted with ❤️ by **𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 ✓**
 
-Empowering developers with powerful WhatsApp automation tools
+*The most powerful WhatsApp automation toolkit*
 
-If this project helped you, consider starring the repository! ⭐
+⭐ Star the repository if this helped you!
 
 </div>

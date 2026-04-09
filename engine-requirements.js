@@ -1,3 +1,9 @@
+/*
+# toxic-baileys™
+# By 𝐱𝐡_𝐜𝐥𝐢𝐧𝐭𝐨𝐧 ✓
+!- do not delete this credit
+
+*/
 const major = parseInt(process.versions.node.split('.')[0], 10);
 
 if (major < 20) {
