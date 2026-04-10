@@ -871,7 +871,7 @@ This project is **NOT** affiliated with, authorized, maintained, sponsored, or e
 ## 🆘 Getting Help
 
 1. **GitHub Issues** — [github.com/xhclintohn/Baileys/issues](https://github.com/xhclintohn/Baileys/issues)
-2. **WhatsApp** — +254735342808
+2. **WhatsApp** — +254114885159
 3. **Response Time** — Typically within 24–48 hours
 
 ---
